@@ -3,7 +3,6 @@ from twython import Twython
 import time
 from mote import Mote
 from colorsys import hsv_to_rgb
-from sys import exit
 # Imports auth keys from auth.py
 from auth import (
     consumer_key,
@@ -55,7 +54,7 @@ def moterainbow():
                 mote.set_pixel(channel, pixel, r, g, b)
         mote.show()
         time.sleep(0.05)
-        if test == 5 or time.time() > timeout:
+        if time.time() > timeout:
             break
 # ====================================
 
