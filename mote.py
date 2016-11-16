@@ -28,33 +28,15 @@ mote.configure_channel(1, 16, False)
 mote.configure_channel(2, 16, False)
 
 
-def motered():  # For Red colour
+# Used defines the 0-255 colour of red, green, blue
+def motecolour(red, green, blue):
     mote.clear()
     # Sets so all channels get changed
     for channel in range(1, 2):
         # Sets all pixels to change colour
         for pixel in range(16):
-            mote.set_pixel(channel, pixel, 255, 0, 0)
-    mote.show()
-
-
-def moteblue():  # For Blue colour
-    mote.clear()
-    # Sets so all channels get changed
-    for channel in range(1, 2):
-        # Sets all pixels to change colour
-        for pixel in range(16):
-            mote.set_pixel(channel, pixel, 0, 0, 255)
-    mote.show()
-
-
-def motegreen():  # For Green colour
-    mote.clear()
-    # Sets so all channels get changed
-    for channel in range(1, 2):
-        # Sets all pixels to change colour
-        for pixel in range(16):
-            mote.set_pixel(channel, pixel, 0, 255, 0)
+            # sets colour
+            mote.set_pixel(channel, pixel, red, green, blue)
     mote.show()
 # ====================================
 
@@ -80,13 +62,13 @@ while True:
     # the status contains '****' then run bellow
     if '#redkeyboard' in lookup:
         print('turn red')
-        motered()
+        motecolour(255, 0, 0)
     elif '#bluekeyboard' in lookup:
         print('turn blue')
-        moteblue()
+        motecolour(0, 0, 255)
     elif '#greenkeyboard' in lookup:
         print('turn green')
-        motegreen()
+        motecolour(0, 255, 0)
     else:
         print('No Colour specified')
     sleep(60)
