@@ -1,7 +1,8 @@
 # Import for twitter
 from twython import Twython
-from time import sleep
+import time
 from mote import Mote
+from colorsys import hsv_to_rgb
 # Imports auth keys from auth.py
 from auth import (
     consumer_key,
@@ -32,12 +33,29 @@ mote.configure_channel(2, 16, False)
 def motecolour(red, green, blue):
     mote.clear()
     # Sets so all channels get changed
-    for channel in range(1, 2):
+    for channel in range(1, 5):
         # Sets all pixels to change colour
         for pixel in range(16):
             # sets colour
             mote.set_pixel(channel, pixel, red, green, blue)
     mote.show()
+
+h = 1
+
+# RAINBOW
+def motorainbow():
+    timeout = time.time() + 60
+    while True:
+        for channel in range(1, 5):
+            pixel_count = mote.get_pixel_count(channel)
+            for pixel in range(pixel_count):
+                hue = (h + ((channel - 1) * pixel_count * 5) + (pixel * 5)) % 360
+                r, g, b = [int(c * 255) for c in hsv_to_rgb(hue / 360.0, 1.0, 1.0)]
+                mote.set_pixel(channel, pixel, r, g, b)
+        mote.show()
+        time.sleep(0.05)
+        if test == 5 or time.time() > timeout:
+            break
 # ====================================
 
 
@@ -63,13 +81,19 @@ while True:
     if '#redkeyboard' in lookup:
         print('turn red')
         motecolour(255, 0, 0)
+        time.sleep(60)
     elif '#bluekeyboard' in lookup:
         print('turn blue')
         motecolour(0, 0, 255)
+        time.sleep(60)
     elif '#greenkeyboard' in lookup:
         print('turn green')
         motecolour(0, 255, 0)
+        time.sleep(60)
+    elif '#keyboardrainbow' in lookup:
+        print('RAINBOW Time!')
+        motorainbow()
     else:
         print('No Colour specified')
-    sleep(60)
+        time.sleep(10)
 
