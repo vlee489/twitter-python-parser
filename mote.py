@@ -42,8 +42,9 @@ def motecolour(red, green, blue):
 
 h = 1
 
+
 # RAINBOW
-def motorainbow():
+def moterainbow():
     timeout = time.time() + 60
     while True:
         for channel in range(1, 5):
@@ -92,7 +93,7 @@ while True:
         time.sleep(60)
     elif '#keyboardrainbow' in lookup:
         print('RAINBOW Time!')
-        motorainbow()
+        moterainbow()
     else:
         print('No Colour specified')
         time.sleep(10)
