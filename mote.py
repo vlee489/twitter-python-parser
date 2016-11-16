@@ -64,7 +64,8 @@ def motegreen():  # For Green colour
 # on Twitter (dependent of search query)
 def retrieve():
     # https://dev.twitter.com/rest/reference/get/search/tweets
-    # by setting q='****' you can search for tweets to specified account*
+    # by setting q='****' you can search for tweets to specified account
+    # count specifies how many status updates you want returned, in our case 1
     search = twitter.search(q='@vlee888', count=1)
     # used to look into dictionary
     tweets = search['statuses']
