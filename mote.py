@@ -20,6 +20,14 @@ twitter = Twython(
 )
 
 # ====================================
+# Sleep/recheck time. This defines the time before
+# Twitter is checked again
+
+normal = 60
+noStatus = 10
+# ====================================
+
+# ====================================
 # This is the Mote config setting and the definitions
 # for the colour changing.
 
@@ -44,7 +52,7 @@ def motecolour(red, green, blue):
 # RAINBOW
 def moterainbow():
     h = 1
-    timeout = time.time() + 60
+    timeout = time.time() + normal
     while True:
         for channel in range(1, 5):
             pixel_count = mote.get_pixel_count(channel)
@@ -81,18 +89,18 @@ while True:
     if '#redkeyboard' in lookup:
         print('turn red')
         motecolour(255, 0, 0)
-        time.sleep(60)
+        time.sleep(normal)
     elif '#bluekeyboard' in lookup:
         print('turn blue')
         motecolour(0, 0, 255)
-        time.sleep(60)
+        time.sleep(normal)
     elif '#greenkeyboard' in lookup:
         print('turn green')
         motecolour(0, 255, 0)
-        time.sleep(60)
+        time.sleep(normal)
     elif '#keyboardrainbow' in lookup:
         print('RAINBOW Time!')
         moterainbow()
     else:
         print('No Colour specified')
-        time.sleep(10)
+        time.sleep(noStatus)
