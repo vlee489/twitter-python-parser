@@ -2,6 +2,7 @@
 from twython import Twython
 from time import sleep
 from mote import Mote
+# Imports auth keys from auth.py
 from auth import (
     consumer_key,
     consumer_secret,
@@ -17,13 +18,17 @@ twitter = Twython(
     access_token_secret
 )
 
+# ====================================
+# This is the Mote config setting and the definitions
+# for the colour changing.
+
 # Mote config
 mote = Mote()
 mote.configure_channel(1, 16, False)
 mote.configure_channel(2, 16, False)
 
 
-def motered():
+def motered():  # For Red colour
     mote.clear()
     # Sets so all channels get changed
     for channel in range(1, 2):
@@ -33,7 +38,7 @@ def motered():
     mote.show()
 
 
-def moteblue():
+def moteblue():  # For Blue colour
     mote.clear()
     # Sets so all channels get changed
     for channel in range(1, 2):
@@ -42,7 +47,8 @@ def moteblue():
             mote.set_pixel(channel, pixel, 0, 0, 255)
     mote.show()
 
-def motegreen():
+
+def motegreen():  # For Green colour
     mote.clear()
     # Sets so all channels get changed
     for channel in range(1, 2):
@@ -50,7 +56,12 @@ def motegreen():
         for pixel in range(16):
             mote.set_pixel(channel, pixel, 0, 255, 0)
     mote.show()
+# ====================================
 
+
+# ====================================
+# This is responsible for retrieving the last tweet
+# on Twitter (dependent of search query)
 def retrieve():
     # https://dev.twitter.com/rest/reference/get/search/tweets
     # by setting q='****' you can search for tweets to specified account*
@@ -60,6 +71,7 @@ def retrieve():
     for tweet in tweets:
         status = tweet['text']
         return status
+# ====================================
 
 while True:
     lookup = retrieve()
