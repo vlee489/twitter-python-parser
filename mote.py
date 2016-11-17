@@ -19,25 +19,30 @@ twitter = Twython(
     access_token_secret
 )
 
+
 # ====================================
 # Sleep/recheck time. This defines the time before
 # Twitter is checked again
+# Time defined in seconds!
 
 normal = 60
 noStatus = 10
 # ====================================
 
+
 # ====================================
 # This is the Mote config setting and the definitions
 # for the colour changing.
 
-# Mote config
 mote = Mote()
+
+# Mote config
 mote.configure_channel(1, 16, False)
 mote.configure_channel(2, 16, False)
 
 
-# Used defines the 0-255 colour of red, green, blue
+# Use by doing motecolour(red, green, blue)
+# define colours red, green, blue with a number 0-255
 def motecolour(red, green, blue):
     mote.clear()
     # Sets so all channels get changed
@@ -98,9 +103,12 @@ while True:
         print('turn green')
         motecolour(0, 255, 0)
         time.sleep(normal)
-    elif '#keyboardrainbow' in lookup:
+    elif '#rainbowkeyboard' in lookup:
         print('RAINBOW Time!')
         moterainbow()
+    elif '#purplekeyboard' in lookup:
+        print('turn purple')
+        motecolour(165, 30, 214)
     else:
         print('No Colour specified')
         time.sleep(noStatus)
